@@ -1,5 +1,8 @@
 import React from "react";
+import AppLayout from "../components/layout/AppLayout";
 
-export const Group = () => {
+const Group = () => {
   return <div>Group</div>;
 };
+
+export default AppLayout()(Group);
