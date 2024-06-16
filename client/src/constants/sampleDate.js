@@ -56,3 +56,33 @@ export const sampleNotifications = [
     _id: "2",
   },
 ];
+
+export const sampleMessage = [
+  {
+    attachments: [],
+    content: "Hi, k grdei chou timi?",
+    _id: "sdfsdfsdf",
+    sender: {
+      _id: "user._id",
+      name: "Ashwini Karki",
+    },
+    chat: "chatId",
+    createdAt: "2024-02-12T10:41:30.630Z",
+  },
+  {
+    attachments: [
+      {
+        public_id: "asdsad 2",
+        url: "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      },
+    ],
+    content: "",
+    _id: "sdfsdfsdfqqq",
+    sender: {
+      _id: "asdasd",
+      name: "Ashwini Karki 2",
+    },
+    chat: "chatId",
+    createdAt: "2024-02-12T10:41:30.630Z",
+  },
+];
