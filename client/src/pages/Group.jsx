@@ -23,7 +23,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { orange, matBlack } from "../constants/color";
+import { orange, matBlack, bgGradient } from "../constants/color";
 import {
   Done as DoneIcon,
   Edit as EditIcon,
@@ -34,7 +34,8 @@ import {
 } from "@mui/icons-material";
 import { Link } from "../components/styles/StyledComponent";
 import AvatarCard from "../components/shared/AvatarCard";
-import { sampleChats } from "../constants/sampleDate";
+import { sampleChats, sampleUsers } from "../constants/sampleDate";
+import UserItem from "../components/shared/UserItem";
 const ConfirmDeleteDialog = lazy(() =>
   import("../components/dialogs/ConfirmDeleteDialog")
 );
@@ -81,9 +82,14 @@ const Group = () => {
   const deleteHandler = () => {
     console.log("delete handler");
   };
+  const removeMemberHandler = (id) => {
+    console.log("Remove", id);
+  };
   useEffect(() => {
-    setGroupName(`Group Name ${chatId}`);
-    setGroupNameUpdatedValue(`Group Name ${chatId}`);
+    if (chatId) {
+      setGroupName(`Group Name ${chatId}`);
+      setGroupNameUpdatedValue(`Group Name ${chatId}`);
+    }
 
     return () => {
       setGroupName("");
@@ -204,7 +210,6 @@ const Group = () => {
           },
         }}
         sm={4}
-        bgcolor={"bisque"}
       >
         <GroupList myGroups={sampleChats} chatId={chatId} />
       </Grid>
@@ -241,11 +246,23 @@ const Group = () => {
                 md: "1rem 4rem",
               }}
               spacing={"2rem"}
-              bgcolor={"bisque"}
+              // bgcolor={"bisque"}
               height={"50vh"}
               overflow={"auto"}
             >
-              {/* Member */}
+              {sampleUsers.map((user) => (
+                <UserItem
+                  key={user._id}
+                  user={user}
+                  isAdded
+                  styling={{
+                    boxShadow: "0 0 0.5rem rgba(0,0,0,0.2)",
+                    padding: "1rem 2rem",
+                    borderRadius: "1rem",
+                  }}
+                  handler={removeMemberHandler}
+                />
+              ))}
             </Stack>
             {ButtonGroup}
           </>
@@ -282,7 +299,14 @@ const Group = () => {
 };
 
 const GroupList = ({ w = "100%", myGroups = [], chatId }) => (
-  <Stack width={w}>
+  <Stack
+    width={w}
+    sx={{
+      backgroundImage: bgGradient,
+      height: "100vh",
+      overflow: "auto",
+    }}
+  >
     {myGroups.length > 0 ? (
       myGroups.map((group) => (
         <GroupListItem group={group} chatId={chatId} key={group._id} />

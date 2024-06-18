@@ -17,6 +17,123 @@ export const sampleChats = [
     groupChat: false,
     members: ["1", "2"],
   },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0o-F0SLAGiYm5BvLl-I1uX4WJSuITvQ02vg&s",
+  //   ],
+  //   name: "Ashwini Karki",
+  //   _id: "3",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHkVrdzjGqo1VnQqXQ67GGNHRrp404Jm8OBA&s",
+  //   ],
+  //   name: "Ashima Pradhan",
+  //   _id: "4",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0o-F0SLAGiYm5BvLl-I1uX4WJSuITvQ02vg&s",
+  //   ],
+  //   name: "Ashwini Karki",
+  //   _id: "5",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHkVrdzjGqo1VnQqXQ67GGNHRrp404Jm8OBA&s",
+  //   ],
+  //   name: "Ashima Pradhan",
+  //   _id: "6",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0o-F0SLAGiYm5BvLl-I1uX4WJSuITvQ02vg&s",
+  //   ],
+  //   name: "Ashwini Karki",
+  //   _id: "7",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHkVrdzjGqo1VnQqXQ67GGNHRrp404Jm8OBA&s",
+  //   ],
+  //   name: "Ashima Pradhan",
+  //   _id: "8",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0o-F0SLAGiYm5BvLl-I1uX4WJSuITvQ02vg&s",
+  //   ],
+  //   name: "Ashwini Karki",
+  //   _id: "9",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHkVrdzjGqo1VnQqXQ67GGNHRrp404Jm8OBA&s",
+  //   ],
+  //   name: "Ashima Pradhan",
+  //   _id: "10",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0o-F0SLAGiYm5BvLl-I1uX4WJSuITvQ02vg&s",
+  //   ],
+  //   name: "Ashwini Karki",
+  //   _id: "11",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHkVrdzjGqo1VnQqXQ67GGNHRrp404Jm8OBA&s",
+  //   ],
+  //   name: "Ashima Pradhan",
+  //   _id: "12",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0o-F0SLAGiYm5BvLl-I1uX4WJSuITvQ02vg&s",
+  //   ],
+  //   name: "Ashwini Karki",
+  //   _id: "13",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHkVrdzjGqo1VnQqXQ67GGNHRrp404Jm8OBA&s",
+  //   ],
+  //   name: "Ashima Pradhan",
+  //   _id: "14",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
+  // {
+  //   avatar: [
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0o-F0SLAGiYm5BvLl-I1uX4WJSuITvQ02vg&s",
+  //   ],
+  //   name: "Ashwini Karki",
+  //   _id: "15",
+  //   groupChat: false,
+  //   members: ["1", "2"],
+  // },
 ];
 
 export const sampleUsers = [
