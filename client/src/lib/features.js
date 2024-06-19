@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const fileFormat = (url = "") => {
   const fileExtention = url.split(".").pop();
 
@@ -24,4 +26,17 @@ const fileFormat = (url = "") => {
 
 const transformImg = (url = "", width = 100) => url;
 
-export { fileFormat, transformImg };
+const getLastSevenDays = () => {
+  const currentDate = moment();
+  const last7Days = [];
+
+  for (let i = 0; i < 7; i++) {
+    const dayDate = currentDate.clone().subtract(i, "days");
+    const dayName = dayDate.format("dddd");
+    last7Days.unshift(dayName);
+  }
+
+  return last7Days;
+};
+
+export { fileFormat, transformImg, getLastSevenDays };

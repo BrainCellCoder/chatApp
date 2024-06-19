@@ -203,3 +203,161 @@ export const sampleMessage = [
     createdAt: "2024-02-12T10:41:30.630Z",
   },
 ];
+
+export const dashoardData = {
+  users: [
+    {
+      name: "Abhishek Sharma",
+      avatar:
+        "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      _id: "1",
+      username: "avi_sharma",
+      friends: 20,
+      groups: 5,
+    },
+    {
+      name: "Abhishek Sharma",
+      avatar:
+        "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      _id: "2",
+      username: "avi_sharma",
+      friends: 20,
+      groups: 5,
+    },
+    {
+      name: "Abhishek Sharma 2",
+      avatar:
+        "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      _id: "3",
+      username: "avi_sharma2",
+      friends: 120,
+      groups: 50,
+    },
+    {
+      name: "Abhishek Sharma 3",
+      avatar:
+        "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      _id: "4",
+      username: "avi_sharma",
+      friends: 230,
+      groups: 53,
+    },
+  ],
+
+  chats: [
+    {
+      name: "Abhi",
+      avatar: [
+        "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      ],
+      _id: "1",
+      groupChat: false,
+      members: [
+        {
+          _id: "1",
+          avatar:
+            "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        },
+        {
+          _id: "2",
+          avatar:
+            "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        },
+      ],
+      totalMembers: 2,
+      totalMessages: 20,
+      creator: {
+        name: "asdasd",
+        avatar:
+          "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      },
+    },
+    {
+      name: "Abhi",
+      avatar: [
+        "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      ],
+      _id: "1",
+      groupChat: false,
+      members: [
+        {
+          _id: "1",
+          avatar:
+            "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        },
+        {
+          _id: "2",
+          avatar:
+            "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        },
+      ],
+      totalMembers: 2,
+      totalMessages: 20,
+      creator: {
+        name: "asdasd",
+        avatar:
+          "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      },
+    },
+    {
+      name: "Abhi",
+      avatar: [
+        "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      ],
+      _id: "1",
+      groupChat: false,
+      members: [
+        {
+          _id: "1",
+          avatar:
+            "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        },
+        {
+          _id: "2",
+          avatar:
+            "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        },
+      ],
+      totalMembers: 2,
+      totalMessages: 20,
+      creator: {
+        name: "asdasd",
+        avatar:
+          "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+      },
+    },
+  ],
+  message: [
+    {
+      attachments: [],
+      content: "cccccc",
+      _id: "qwe",
+      sender: {
+        avatar:
+          "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        name: "name",
+      },
+      chat: "chatID",
+      groupChat: false,
+      createdAt: "2024-02-12T10:41:30.630Z",
+    },
+    {
+      attachments: [
+        {
+          public_id: "asdasd",
+          url: "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        },
+      ],
+      content: "cccccc",
+      _id: "qwe2",
+      sender: {
+        avatar:
+          "https://images.creativefabrica.com/products/previews/2023/10/27/LH874No6w/2XLj7loRuN3Sa7nt65RxsyKSx7Y-mobile.jpg",
+        name: "name",
+      },
+      chat: "chatID",
+      groupChat: true,
+      createdAt: "2024-02-12T10:41:30.630Z",
+    },
+  ],
+};

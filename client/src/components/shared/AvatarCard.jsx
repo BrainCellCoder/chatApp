@@ -8,11 +8,11 @@ const AvatarCard = ({ avatar = [], max = 4 }) => {
     <Stack direction={"row"} spacing={0.5}>
       <AvatarGroup
         max={max}
-        // sx={{
-        //   position: "relative",
-        // }}
+        sx={{
+          position: "relative",
+        }}
       >
-        <Box width={"5rem"} hieght={"3rem"}>
+        <Box width={"5rem"} height={"3rem"}>
           {avatar.map((i, index) => (
             <Avatar
               key={Math.random() * 100}
@@ -21,12 +21,12 @@ const AvatarCard = ({ avatar = [], max = 4 }) => {
               sx={{
                 width: "2.5rem",
                 height: "2.5rem",
-                // position: "absolute",
+                position: "absolute",
                 left: {
                   xs: `${0.5 + index}rem`,
                   sm: `${index}rem`,
                 },
-                // top: "10px"
+                top: "10px",
               }}
             />
           ))}
