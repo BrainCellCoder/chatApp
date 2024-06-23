@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 mongoose.set("strictQuery", false);
 import dotenv from "dotenv";
 import { app } from "./app.js";
+import { createUser } from "./seeders/user.js";
 
 dotenv.config({ path: "./.env" });
 
