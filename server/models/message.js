@@ -2,7 +2,7 @@ import mongoose, { Schema, Types, model } from "mongoose";
 
 const schema = new Schema(
   {
-    constent: String,
+    content: String,
     attachments: [
       {
         public_id: {
