@@ -3,7 +3,7 @@
 import mongoose from "mongoose";
 mongoose.set("strictQuery", false);
 import dotenv from "dotenv";
-import { app } from "./app.js";
+import { app, envMode } from "./app.js";
 import { createUser } from "./seeders/user.js";
 
 dotenv.config({ path: "./.env" });
@@ -23,5 +23,5 @@ mongoose
   });
 
 app.listen(PORT, () => {
-  console.log(`Listening on port ${PORT}...`);
+  console.log(`Listening on port ${PORT}... in ${envMode} mode`);
 });

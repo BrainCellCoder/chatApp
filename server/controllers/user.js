@@ -6,28 +6,26 @@ import { ErrorHandler } from "../utils/utility.js";
 import { Chat } from "../models/chat.js";
 import { Request } from "../models/request.js";
 import { NEW_REQUEST, REFETCH_CHATS } from "../constants/events.js";
+import { getOtherMembers } from "../lib/helper.js";
 
 // create a new user and save it in database and save token in cookie
-const newUser = async (req, res) => {
+const newUser = TryCatch(async (req, res) => {
   const { name, username, password, bio } = req.body;
-
+  const file = req.file;
+  if (!file) return next(new ErrorHandler("Please upload avatar"));
   const avatar = {
     public_id: "asd",
     url: "asd",
   };
-  try {
-    const user = await User.create({
-      name,
-      bio,
-      username,
-      password,
-      avatar,
-    });
-    sendToken(res, user, 201, "User created");
-  } catch (err) {
-    console.log(err);
-  }
-};
+  const user = await User.create({
+    name,
+    bio,
+    username,
+    password,
+    avatar,
+  });
+  sendToken(res, user, 201, "User created");
+});
 
 const login = TryCatch(async (req, res, next) => {
   const { username, password } = req.body;
@@ -44,15 +42,17 @@ const login = TryCatch(async (req, res, next) => {
   sendToken(res, user, 200, `Welcome Back, ${user.name}`);
 });
 
-const getMyProfile = TryCatch(async (req, res) => {
+const getMyProfile = TryCatch(async (req, res, next) => {
   const user = await User.findById(req.user);
+  if (!user) return next(new ErrorHandler("User not found", 404));
+
   res.status(200).json({
     success: true,
     data: user,
   });
 });
 
-const searchUser = TryCatch(async (req, res) => {
+const searchUser = TryCatch(async (req, res, next) => {
   const { name = "" } = req.query;
 
   //finding all my chats
@@ -83,7 +83,7 @@ const searchUser = TryCatch(async (req, res) => {
   });
 });
 
-const sendFriendRequest = TryCatch(async (req, res) => {
+const sendFriendRequest = TryCatch(async (req, res, next) => {
   const { userId } = req.body;
   const request = await Request.findOne({
     $or: [
@@ -106,7 +106,7 @@ const sendFriendRequest = TryCatch(async (req, res) => {
   });
 });
 
-const acceptFriendRequest = TryCatch(async (req, res) => {
+const acceptFriendRequest = TryCatch(async (req, res, next) => {
   const { requestId, accept } = req.body;
 
   const request = await Request.findById(requestId)
@@ -114,8 +114,7 @@ const acceptFriendRequest = TryCatch(async (req, res) => {
     .populate("receiver", "name");
 
   if (!request) return next(new ErrorHandler("Request not found", 400));
-
-  if (request.receiver.toString() !== req.user.toString())
+  if (request.receiver._id.toString() !== req.user.toString())
     return next(
       new ErrorHandler("you are not authorized to accept this request", 401)
     );
@@ -166,6 +165,43 @@ const getMyNotifications = TryCatch(async (req, res, next) => {
   });
 });
 
+const getMyFriends = TryCatch(async (req, res, next) => {
+  const chatId = req.query.chatId;
+
+  const chats = await Chat.find({
+    members: req.user,
+    groupChat: false,
+  }).populate("members", "name avatar");
+
+  const friends = chats.map(({ members }) => {
+    const otherMembers = getOtherMembers(members, req.user);
+
+    return {
+      _id: otherMembers._id,
+      name: otherMembers.name,
+      avatar: otherMembers.avatar.url,
+    };
+  });
+
+  if (chatId) {
+    const chat = await Chat.findById(chatId);
+
+    const availableFriends = friends.filter(
+      (friend) => !chat.members.includes(friend._id)
+    );
+
+    return res.status(200).json({
+      success: true,
+      friends: availableFriends,
+    });
+  } else {
+    return res.status(200).json({
+      success: true,
+      friends,
+    });
+  }
+});
+
 const logout = TryCatch(async (req, res) => {
   return res
     .status(200)
@@ -185,4 +221,5 @@ export {
   sendFriendRequest,
   acceptFriendRequest,
   getMyNotifications,
+  getMyFriends,
 };

@@ -1,4 +1,4 @@
-import { body, param, validationResult, check, query } from "express-validator";
+import { body, param, validationResult } from "express-validator";
 import { ErrorHandler } from "../utils/utility.js";
 
 export const validateHandler = (req, res, next) => {
@@ -17,7 +17,6 @@ export const registerValidator = () => [
   body("username", "Please Enter Username").notEmpty(),
   body("password", "Please Enter Password").notEmpty(),
   body("bio", "Please Enter Bio").notEmpty(),
-  check("avatar", "Please Upload Avatar").notEmpty(),
 ];
 
 export const loginValidator = () => [
@@ -50,11 +49,6 @@ export const removeMemberValidator = () => [
 
 export const sendAttachmentsValidator = () => [
   body("chatId", "Please Enter ChatID").notEmpty(),
-  check("files")
-    .notEmpty()
-    .withMessage("Please Upload Attachments")
-    .isArray({ min: 1, max: 5 })
-    .withMessage("Attachments must be 1-5"),
 ];
 
 export const getChatIdValidator = () => [
@@ -77,4 +71,8 @@ export const acceptRequestValidator = () => [
     .withMessage("Please add accept")
     .isBoolean()
     .withMessage("Accept must be boolean"),
+];
+
+export const adminLoginValidator = () => [
+  body("secretKey", "Please Enter secretKey").notEmpty(),
 ];
