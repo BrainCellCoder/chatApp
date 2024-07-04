@@ -3,7 +3,7 @@ import { ErrorHandler } from "../utils/utility.js";
 import { TryCatch } from "./error.js";
 import { adminSecretKey } from "../app.js";
 
-export const isAuthenticated = (req, res, next) => {
+export const isAuthenticated = TryCatch((req, res, next) => {
   // const token = req.cookies
   const token = req.cookies["chat-token"];
   if (!token)
@@ -13,7 +13,7 @@ export const isAuthenticated = (req, res, next) => {
 
   req.user = decodedData._id;
   next();
-};
+});
 
 export const adminOnly = (req, res, next) => {
   // const token = req.cookies

@@ -6,6 +6,7 @@ dotenv.config({ path: "./.env" });
 import userRoute from "./routes/user.js";
 import chatRoute from "./routes/chat.js";
 import adminRoute from "./routes/admin.js";
+import cors from "cors";
 // import { Server } from "socket.io";
 // import { createServer } from "http";
 
@@ -16,11 +17,23 @@ const app = express();
 // const io = new Server(server, {});
 
 //middlewares
+// app.use(cors());
+const corsOptions = {
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:4173",
+    process.env.CLIENT_URL,
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use("/user", userRoute);
-app.use("/chat", chatRoute);
-app.use("/admin", adminRoute);
+
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/chat", chatRoute);
+app.use("/api/v1/admin", adminRoute);
 
 app.get("/", (req, res) => {
   res.send("Home");

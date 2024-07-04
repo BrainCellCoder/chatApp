@@ -1,8 +1,13 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectRoute from "./components/auth/ProtectRoute";
 import NotFound from "./pages/NotFound";
 import Loader from "./components/layout/Loader";
+import axios from "axios";
+import { server } from "./constants/config.js";
+import { useDispatch, useSelector } from "react-redux";
+import { userNotExists } from "./redux/reducers/auth.js";
+import { Toaster } from "react-hot-toast";
 // import AdminLogin from "./pages/admin/AdminLogin";
 // import Home from "./pages/Home";
 // import Chat from "./pages/Chat";
@@ -18,9 +23,21 @@ const DashBoard = lazy(() => import("./pages/admin/DashBoard"));
 const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
 const ChatManagement = lazy(() => import("./pages/admin/ChatManagement"));
 const MessageManagement = lazy(() => import("./pages/admin/MessageManagement"));
-let user = true;
+// const user = false;
 const App = () => {
-  return (
+  let { user, loader } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .get(`${server}/api/v1/user/me`)
+      .then((res) => console.log(res))
+      .catch((err) => dispatch(userNotExists()));
+  }, [dispatch]);
+
+  return loader ? (
+    <Loader />
+  ) : (
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
@@ -37,6 +54,7 @@ const App = () => {
               </ProtectRoute>
             }
           />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<DashBoard />} />
           <Route path="/admin/users" element={<UserManagement />} />
@@ -45,6 +63,8 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+
+      <Toaster position="bottom-center" />
     </Router>
   );
 };
