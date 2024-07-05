@@ -7,11 +7,18 @@ import userRoute from "./routes/user.js";
 import chatRoute from "./routes/chat.js";
 import adminRoute from "./routes/admin.js";
 import cors from "cors";
+import { v2 as cloudinary } from "cloudinary";
 // import { Server } from "socket.io";
 // import { createServer } from "http";
 
 export const adminSecretKey = process.env.ADMIN_SECRET_KEY || "key123";
 export const envMode = process.env.NODE_ENV?.trim() || "PRODUCTION";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 const app = express();
 // const server = createServer(app);
 // const io = new Server(server, {});

@@ -14,12 +14,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-// import { VisuallyHiddenInput } from "../components/styles/StyledComponents";
+import { VisuallyHiddenInput } from "../components/styles/StyledComponent";
 import { bgGradient } from "../constants/color";
 import { server } from "../constants/config";
 import { userExists } from "../redux/reducers/auth";
 import { usernameValidator } from "../utils/validators";
-// import { VisuallyHiddenInput } from "../components/styles/StyledComponent.js";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -58,7 +57,7 @@ const Login = () => {
         },
         config
       );
-      dispatch(userExists(data.user));
+      dispatch(userExists(true));
       toast.success(data.message, {
         id: toastId,
       });
@@ -98,7 +97,7 @@ const Login = () => {
         config
       );
 
-      dispatch(userExists(data.user));
+      dispatch(userExists(true));
       toast.success(data.message, {
         id: toastId,
       });
@@ -229,10 +228,10 @@ const Login = () => {
                   >
                     <>
                       <CameraAltIcon />
-                      {/* <VisuallyHiddenInput
+                      <VisuallyHiddenInput
                         type="file"
                         onChange={avatar.changeHandler}
-                      /> */}
+                      />
                     </>
                   </IconButton>
                 </Stack>

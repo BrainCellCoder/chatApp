@@ -1,6 +1,11 @@
 import { compare } from "bcrypt";
 import { User } from "../models/user.js";
-import { cookieOption, emitEvent, sendToken } from "../utils/features.js";
+import {
+  cookieOption,
+  emitEvent,
+  sendToken,
+  uploadFilesToCloudinary,
+} from "../utils/features.js";
 import { TryCatch } from "../middlewares/error.js";
 import { ErrorHandler } from "../utils/utility.js";
 import { Chat } from "../models/chat.js";
@@ -9,13 +14,16 @@ import { NEW_REQUEST, REFETCH_CHATS } from "../constants/events.js";
 import { getOtherMembers } from "../lib/helper.js";
 
 // create a new user and save it in database and save token in cookie
-const newUser = TryCatch(async (req, res) => {
+const newUser = TryCatch(async (req, res, next) => {
   const { name, username, password, bio } = req.body;
   const file = req.file;
   if (!file) return next(new ErrorHandler("Please upload avatar"));
+
+  const result = await uploadFilesToCloudinary([file]);
+
   const avatar = {
-    public_id: "asd",
-    url: "asd",
+    public_id: result[0].public_id,
+    url: result[0].url,
   };
   const user = await User.create({
     name,
@@ -52,25 +60,22 @@ const getMyProfile = TryCatch(async (req, res, next) => {
   });
 });
 
-const searchUser = TryCatch(async (req, res, next) => {
+const searchUser = TryCatch(async (req, res) => {
   const { name = "" } = req.query;
 
-  //finding all my chats
-  const myChats = await Chat.find({
-    groupChat: false,
-    members: req.user,
-  });
+  // Finding All my chats
+  const myChats = await Chat.find({ groupChat: false, members: req.user });
 
-  // extracting all users from my chat means friends or people i have chatted with
-  const allUsersFromMyChat = myChats.flatMap((chat) => chat.members);
+  //  extracting All Users from my chats means friends or people I have chatted with
+  const allUsersFromMyChats = myChats.flatMap((chat) => chat.members);
 
-  // finding all users except me and my friends
+  // Finding all users except me and my friends
   const allUsersExceptMeAndFriends = await User.find({
-    _id: { $nin: allUsersFromMyChat },
+    _id: { $nin: allUsersFromMyChats },
     name: { $regex: name, $options: "i" },
   });
 
-  //modifying the response
+  // Modifying the response
   const users = allUsersExceptMeAndFriends.map(({ _id, name, avatar }) => ({
     _id,
     name,
