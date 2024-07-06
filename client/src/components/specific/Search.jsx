@@ -20,29 +20,20 @@ import {
   useSendFriendRequestMutation,
 } from "../../redux/api/api";
 import toast from "react-hot-toast";
+import { useAsyncMutation } from "../../hooks/hooks";
 
 const Search = () => {
   const { isSearch } = useSelector((state) => state.misc);
   const [searchUser] = useLazySearchUserQuery();
-  const [sendFriendRequest] = useSendFriendRequestMutation();
+  const [sendFriendRequest, isLoadingFriendRequest] = useAsyncMutation(
+    useSendFriendRequestMutation
+  );
   const dispatch = useDispatch();
   const search = useInputValidation("");
 
-  let isLoadingFriendRequest = false;
   const [users, setUsers] = useState([]);
   const addFriendHandler = async (id) => {
-    try {
-      const res = await sendFriendRequest({ userId: id });
-      if (res.data) {
-        toast.success("Friend request Sent");
-        console.log(res.data);
-      } else {
-        toast.error(res?.error?.data?.message || "Something went wrong");
-      }
-    } catch (err) {
-      console.log(err);
-      toast.error("Something went wrong");
-    }
+    await sendFriendRequest("Sending friend request...", { userId: id });
   };
 
   const searchCloseHandler = () => {

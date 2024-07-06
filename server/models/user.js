@@ -17,6 +17,10 @@ const schema = new Schema(
       required: true,
       select: false, //if we query user the password will not be sent
     },
+    bio: {
+      type: String,
+      required: true,
+    },
     avatar: {
       public_id: {
         type: String,
