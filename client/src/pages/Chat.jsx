@@ -12,19 +12,33 @@ import { sampleMessage } from "../constants/sampleDate";
 import MessageComponent from "../components/shared/MessageComponent";
 import { getSocket } from "../socket";
 import { NEW_MESSAGE } from "../constants/events";
-import { useChatDetailsQuery } from "../redux/api/api";
-import { useSocketEvents } from "../hooks/hooks";
+import { useChatDetailsQuery, useGetMessagesQuery } from "../redux/api/api";
+import { useErrors, useSocketEvents } from "../hooks/hooks";
+import { useInfiniteScrollTop } from "6pp";
 
 const Chat = ({ chatId, user }) => {
   const containerRef = useRef(null);
-
   const socket = getSocket();
-
-  const chatDetails = useChatDetailsQuery({ chatId, skip: !chatId });
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [page, setPage] = useState(1);
+  const chatDetails = useChatDetailsQuery({ chatId, skip: !chatId });
 
+  const oldMessagesChunk = useGetMessagesQuery({ chatId, page });
+
+  const { data: oldMessages, setData: setOldMessages } = useInfiniteScrollTop(
+    containerRef,
+    oldMessagesChunk?.data?.totalPages,
+    page,
+    setPage,
+    oldMessagesChunk.data?.message
+  );
+
+  const errors = [
+    { isError: chatDetails.isError, error: chatDetails.error },
+    { isError: oldMessagesChunk.isError, error: oldMessagesChunk.error },
+  ];
   const members = chatDetails?.data?.chat?.members;
 
   const submitHandler = (e) => {
@@ -44,6 +58,8 @@ const Chat = ({ chatId, user }) => {
 
   useSocketEvents(socket, eventHandlers);
 
+  useErrors(errors);
+  const allMessages = [...oldMessages, ...messages];
   return chatDetails.isLoading ? (
     <Skeleton />
   ) : (
@@ -59,7 +75,7 @@ const Chat = ({ chatId, user }) => {
           overflowY: "auto",
         }}
       >
-        {messages.map((msg) => (
+        {allMessages.map((msg) => (
           <MessageComponent key={msg._id} message={msg} user={user} />
         ))}
       </Stack>
