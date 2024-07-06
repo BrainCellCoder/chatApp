@@ -8,6 +8,7 @@ import { server } from "./constants/config.js";
 import { useDispatch, useSelector } from "react-redux";
 import { userExists, userNotExists } from "./redux/reducers/auth.js";
 import { Toaster } from "react-hot-toast";
+import { SocketProvider } from "./socket.jsx";
 // import AdminLogin from "./pages/admin/AdminLogin";
 // import Home from "./pages/Home";
 // import Chat from "./pages/Chat";
@@ -41,7 +42,13 @@ const App = () => {
     <Router>
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route element={<ProtectRoute user={user} />}>
+          <Route
+            element={
+              <SocketProvider>
+                <ProtectRoute user={user} />
+              </SocketProvider>
+            }
+          >
             <Route path="/" element={<Home />} />
             <Route path="/group" element={<Group />} />
             <Route path="/chat/:chatId" element={<Chat />} />

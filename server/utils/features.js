@@ -2,12 +2,28 @@ import jwt from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
 import { v4 as uuid } from "uuid";
 import { getBase64 } from "../lib/helper.js";
+import mongoose from "mongoose";
+mongoose.set("strictQuery", false);
 
 export const cookieOption = {
   maxAge: 15 * 24 * 60 * 60 * 1000,
   sameSite: "none",
   httpOnly: true,
   secure: true,
+};
+
+export const connectDB = (url) => {
+  mongoose
+    .connect(url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then((con) => {
+      console.log("DB connected successfully");
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
 
 export const sendToken = (res, user, code, message) => {
